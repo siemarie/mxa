@@ -61,9 +61,21 @@ createLapChart <- function(file,rider) {
     tempLap<-substr(curRider[lapNo],(nchar(z)+2),(nchar(curRider[lapNo])-1));
     checkString<-substr(tempLap,0,2);
     startString<-"1:";
+    startString2<-"2:";
+    startString3<-"3:";
     if(checkString==startString){
       newString<-as.numeric(substr(tempLap,4,nchar(tempLap)));
       oldStart<-(as.numeric(substr(tempLap,3,3))+6)*10;
+      tempLap<-oldStart+newString;      
+    }
+    if(checkString==startString2){
+      newString<-as.numeric(substr(tempLap,4,nchar(tempLap)));
+      oldStart<-(as.numeric(substr(tempLap,3,3))+12)*10;
+      tempLap<-oldStart+newString;      
+    }
+    if(checkString==startString3){
+      newString<-as.numeric(substr(tempLap,4,nchar(tempLap)));
+      oldStart<-(as.numeric(substr(tempLap,3,3))+18)*10;
       tempLap<-oldStart+newString;      
     }
     riderLaps<-append(riderLaps,tempLap);
@@ -74,8 +86,8 @@ createLapChart <- function(file,rider) {
   output<-paste("name: '",name,"',","color: '",bikeColor,"', marker:{ },data: [",sep="");
   x<-1;
   while(x<=length(riderLaps)) {
-   output<-paste(output,riderLaps[x],", ",sep="")
-   x<-x+1;
+    output<-paste(output,riderLaps[x],", ",sep="")
+    x<-x+1;
   }
   output<-substr(output,0,nchar(output)-2);
   output<-paste(output,"]",sep="");
